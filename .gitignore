@@ -7,7 +7,7 @@ dist
 *.tgz
 
 #migrate
-prisma/migrations
+/prisma/migrations
 
 # code coverage
 coverage
