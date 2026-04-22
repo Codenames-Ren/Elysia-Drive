@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String   @id @default(uuid())
+  email      String
+  fullName   String?
+  avatarUrl  String?
+  provider   String
+  providerId String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  files      File[]
+
+  @@unique([provider, providerId])
+}
+
+model File {
+  id        String   @id @default(uuid())
+  name      String
+  url       String
+  path      String
+  size      Int
+  mimeType  String
+  userId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
