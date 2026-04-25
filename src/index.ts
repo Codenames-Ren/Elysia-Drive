@@ -1,4 +1,4 @@
-import { Elysia, status } from 'elysia';
+import { Elysia } from 'elysia';
 import { cors } from '@elysiajs/cors';
 import { swagger } from '@elysiajs/swagger';
 import { authRoutes } from './routes/auth.route';
@@ -16,7 +16,6 @@ const app = new Elysia()
         }
     }))
 
-    //routing
     .get("/", () => ({
         success: true,
         status: "Server is healthy"
@@ -26,6 +25,10 @@ const app = new Elysia()
     .use(fileRoutes)
 
 const PORT = Number(process.env.PORT) || 3000;
-app.listen(PORT);
 
-console.log(`🦊 Elysia is running at http://localhost:${PORT}`);
+app.listen({
+    port: PORT,
+    hostname: '0.0.0.0'
+});
+
+console.log(`🦊 Server running on port ${PORT}`);
