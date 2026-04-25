@@ -15,5 +15,22 @@ export const authController = {
             data: user,
             token: token
         }
+    },
+
+    async googleLogin({ body }: any) {
+        const { idToken } = body
+
+        const user = await authService.loginWithGoogle(idToken)
+
+        const token = signToken({
+            id: user.id,
+            email: user.email
+        })
+
+        return {
+            success: true,
+            data: user,
+            token
+        }
     }
 }

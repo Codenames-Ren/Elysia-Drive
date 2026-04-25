@@ -1,8 +1,9 @@
-import { Elysia } from 'elysia'
+import { Elysia, t } from 'elysia'
 import { authController } from '../controllers/auth.controller'
-import { loginSchema } from '../models/auth.models'
 
 export const authRoutes = new Elysia({ prefix: '/auth' })
-    .post('/login', authController.login, {
-        body: loginSchema
+    .post('/google', authController.googleLogin, {
+        body: t.Object({
+            idToken: t.String()
+        })
     })
