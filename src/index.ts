@@ -2,6 +2,7 @@ import { Elysia, status } from 'elysia';
 import { cors } from '@elysiajs/cors';
 import { swagger } from '@elysiajs/swagger';
 import { authRoutes } from './routes/auth.route';
+import { fileRoutes } from './routes/file.route';
 
 const app = new Elysia()
     .use(cors())
@@ -22,6 +23,7 @@ const app = new Elysia()
     }))
 
     .use(authRoutes)
+    .use(fileRoutes)
 
 const PORT = Number(process.env.PORT) || 3000;
 app.listen(PORT);
